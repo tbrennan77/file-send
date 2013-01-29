@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <style>input {display:inline-block !important;}</style><![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <style>input {display:inline-block !important;}</style><![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <style>input {display:inline-block !important;}</style><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  
+  <!-- Uncomment to make IE8 render like IE7 -->
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+  
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />  
+  <title><%= content_for?(:title) ? yield(:title) : "BW Upload" %></title>
+  
+  <!-- Included CSS Files -->
+  <%= stylesheet_link_tag    "application" %>
+  
+  <!-- Included JS Files  -->
+  <%= javascript_include_tag "application" %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <!-- Navigation -->
+  <div class="row header-nav">
+    <div class="twelve columns">
+      <nav class="top-bar ">
+        <ul>
+          <li class="name"><h1><%= link_to image_tag("header_logo.png"), root_path %></h1></li>
+          <li class="toggle-topbar"><a href="#"></a></li>
+        </ul>
+ 
+        <section>
+          <ul class="right">
+            <!-- Hide search for now 
+          <li class="search">
+            <%= form_tag root_path do %>
+              <%= search_field_tag :search, nil, placeholder: 'Search...' %>
+            <% end %>
+          </li>
+            <li class="has-button">              
+            <a class="small button radius" href="#">Search</a>            
+          </li>
+            -->
+          <li class="has-button">              
+            <% if false %>
+              <%= link_to "Login / Sign up", root_path, data: {reveal_id: 'myModal'} %>
+            <% else %>
+              <%= link_to "My Account", my_account_path %>
+            <% end %>
+          </li>
+          </ul>
+        </section>
+    </nav>
+ </div>
+ </div>
+    <!-- End Navigation -->
+ 
+  <% if flash[:notice] %>
+      <div class='alert-box success'><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class='alert-box error'><%= flash[:error] %></div>
+  <% end %>
+ 
+ <div class="row">
+    <div class="twelve columns">
+     <%= yield %>
+   </div>
+ </div>
+ 
+    <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="twelve columns"><hr />
+      <div class="row">
+ 
+        <div class="six columns">
+          <p><%= Date.today.year %> &copy; Copyright <%= link_to "Boondock Walker", 'http://www.boondockwalker.com', target: :_blank %></p>
+        </div>
+ 
+        <div class="six columns">
+          <ul class="link-list right">
+            <li><%= link_to "Login", root_path, data: {reveal_id: 'myModal'} %></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">TOS</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+ 
+      </div>
+    </div>
+  </footer>
+
+    <!-- End Footer -->
+  <%= yield :reveal_modal %>
+</body>
+</html>

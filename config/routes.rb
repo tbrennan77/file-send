@@ -1,8 +1,10 @@
 BwUpload::Application.routes.draw do
 
+  get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'my-account' => 'users#my_account', :as => 'my_account'
-  resources :users
 
+  resources :users
+  resources :sessions
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

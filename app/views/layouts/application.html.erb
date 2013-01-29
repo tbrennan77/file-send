@@ -23,6 +23,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if flash[:notice] %>
+      <div class='alert-box success'><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class='alert-box error'><%= flash[:error] %></div>
+  <% end %>
+  
     <!-- Navigation -->
   <div class="row header-nav">
     <div class="twelve columns">
@@ -44,26 +51,18 @@
             <a class="small button radius" href="#">Search</a>            
           </li>
             -->
-          <li class="has-button">              
-            <% if false %>
-              <%= link_to "Login / Sign up", root_path, data: {reveal_id: 'myModal'} %>
+            <% if current_user %>
+              <li><%= link_to "My Account", my_account_path %></li>
+              <li><%= link_to "Logout", logout_path %></li>
             <% else %>
-              <%= link_to "My Account", my_account_path %>
+              <li><%= link_to "Login / Sign up", root_path, data: {reveal_id: 'myModal'} %></li>
             <% end %>
-          </li>
           </ul>
         </section>
     </nav>
  </div>
  </div>
     <!-- End Navigation -->
- 
-  <% if flash[:notice] %>
-      <div class='alert-box success'><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:error] %>
-      <div class='alert-box error'><%= flash[:error] %></div>
-  <% end %>
  
  <div class="row">
     <div class="twelve columns">
@@ -83,7 +82,12 @@
  
         <div class="six columns">
           <ul class="link-list right">
-            <li><%= link_to "Login", root_path, data: {reveal_id: 'myModal'} %></li>
+            <% if current_user %>
+              <li><%= link_to "My Account", my_account_path %></li>
+              <li><%= link_to "Logout", logout_path %></li>
+            <% else %>
+              <li><%= link_to "Login", root_path, data: {reveal_id: 'myModal'} %></li>
+            <% end %>
             <li><a href="#">FAQs</a></li>
             <li><a href="#">TOS</a></li>
             <li><a href="#">Help</a></li>

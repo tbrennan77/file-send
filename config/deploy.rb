@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 
-set :application, "bw_send"
+set :application, "bw_upload"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true

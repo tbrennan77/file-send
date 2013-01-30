@@ -2,7 +2,7 @@ class Notifier < ActionMailer::Base
   
   def send_file(bw_file, email)
     @bw_file = bw_file
-    mail(:from => "BW Files <dh@dillonhafer.com>", :to => email, :subject => "Someone sent you a file!")
+    mail(:from => "BW Files <no-reply@boondockwalker.com>", :to => email, :subject => "Someone sent you a file!")
   end
 
   def new_user(user)

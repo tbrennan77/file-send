@@ -20,7 +20,7 @@ set :branch, "master"
 set :user, "boondoc4"
 
 after "deploy:update_code" do
-  #run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+  run "ln -s #{shared_path}/production.rb #{release_path}/config/environments/production.rb"
   run "rm -rf /home8/boondoc4/public_html/bw_send/"
   run "ln -s #{release_path}/public /home8/boondoc4/public_html/bw_send"
   #run "ln -s #{shared_path}/index.html ~/public_html/pipeline_cms/index.html"

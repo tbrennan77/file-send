@@ -3,4 +3,4 @@ Options -MultiViews
   #Set this to whatever environment you'll be running in
   RailsEnv production
   RackBaseURI /
-  SetEnv GEM_HOME /home8/boondoc4/ruby/gems
+  SetEnv GEM_HOME /home8/boondoc4/.rvm/gems/ruby-1.9.3-p286

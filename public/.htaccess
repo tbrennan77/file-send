@@ -4,3 +4,7 @@ Options -MultiViews
   RailsEnv production
   RackBaseURI /bw_send
   SetEnv GEM_HOME /home8/boondoc4/.rvm/gems/ruby-1.9.3-p286
+  
+  LoadModule passenger_module /home8/boondoc4/.rvm/gems/ruby-1.9.3-p286/gems/passenger-3.0.19/ext/apache2/mod_passenger.so
+  PassengerRoot /home8/boondoc4/.rvm/gems/ruby-1.9.3-p286/gems/passenger-3.0.19
+  PassengerRuby /home8/boondoc4/.rvm/wrappers/ruby-1.9.3-p286/ruby

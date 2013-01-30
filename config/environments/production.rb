@@ -66,8 +66,8 @@ BwUpload::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address              => "box695.bluehost.com",
-  :port                 => 465,
+  :address              => "send.boondockwalker.com",
+  :port                 => 26,
   :domain               => 'send.boondockwalker.com',
   :user_name            => 'no-reply+send.boondockwalker.com',
   :password             => '1qaz!QAZ',

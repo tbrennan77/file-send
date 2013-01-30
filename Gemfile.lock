@@ -52,6 +52,7 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    daemon_controller (1.1.0)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     eventmachine (1.0.0)
@@ -64,6 +65,7 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
+    fastthread (1.0.7)
     foundation-icons-sass-rails (2.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -102,6 +104,11 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.4.0)
       mime-types
+    passenger (3.0.18)
+      daemon_controller (>= 1.0.0)
+      fastthread (>= 1.0.1)
+      rack
+      rake (>= 0.8.1)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.4)
@@ -183,6 +190,7 @@ DEPENDENCIES
   foundation-icons-sass-rails
   jquery-rails
   paperclip (~> 3.0)
+  passenger
   pg
   rails (= 3.2.11)
   rake (~> 10.0.3)

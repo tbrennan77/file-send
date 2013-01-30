@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :bw_files
   attr_accessible :email, :password, :password_confirmation, :admin
   attr_accessor :password
   

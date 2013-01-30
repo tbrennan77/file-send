@@ -51,12 +51,6 @@
             <a class="small button radius" href="#">Search</a>            
           </li>
             -->
-            <% if current_user %>
-              <li><%= link_to "My Account", my_account_path %></li>
-              <li><%= link_to "Logout", logout_path %></li>
-            <% else %>
-              <li><%= link_to "Login / Sign up", root_path, data: {reveal_id: 'myModal'} %></li>
-            <% end %>
           </ul>
         </section>
     </nav>
@@ -82,15 +76,6 @@
  
         <div class="six columns">
           <ul class="link-list right">
-            <% if current_user %>
-              <li><%= link_to "My Account", my_account_path %></li>
-              <li><%= link_to "Logout", logout_path %></li>
-            <% else %>
-              <li><%= link_to "Login", root_path, data: {reveal_id: 'myModal'} %></li>
-            <% end %>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">TOS</a></li>
-            <li><a href="#">Help</a></li>
           </ul>
         </div>
  

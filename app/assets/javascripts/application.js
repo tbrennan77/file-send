@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.min
+//= require jquery-ui.min
 //= require jquery_ujs
 //= require foundation
 //= require_tree .

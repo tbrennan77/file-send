@@ -25,9 +25,11 @@
               </tr>
             </thead>
             <tbody>
+              <% @sent_files.each do |file| %>
               <tr>
-                <td><i class='general foundicon-mic'></i> <%= link_to 'Music.mp3', 'javascript:void(0)' %></td><td>mailer@boondockwalker.com</td><td><%= Date.today %></td><td><i class='general foundicon-trash'></i> <i class='general foundicon-inbox'></i></td>
+                <td><%= file.binary_file.original_file_name %><i class='general foundicon-mic'></i> <%= link_to 'Music.mp3', 'javascript:void(0)' %></td><td>mailer@boondockwalker.com</td><td><%= Date.today %></td><td><i class='general foundicon-trash'></i> <i class='general foundicon-inbox'></i></td>
               </tr>
+              <% end %>
               <tr>
                 <td><i class='general foundicon-photo'></i> <%= link_to 'Photo.png', 'javascript:void(0)' %></td><td>mailer@boondockwalker.com</td><td><%= Date.today %></td><td><i class='general foundicon-trash'></i> <i class='general foundicon-inbox'></i></td>
               </tr>
@@ -66,7 +68,7 @@
 <div id="send_file" class="reveal-modal [expand, xlarge, large, medium, small]">
   <h2>Send file!</h2>
   <p class="lead">just choose a file</p>
-  <%= form_tag root_path do %>
+  <%= form_for @bw_file, :url => bw_files_path, :html => { :multipart => true } do |f| %>
   <div class="row">
     <div class="twelve columns" style='padding:0;'>
       <div class="row collapse">
@@ -74,7 +76,7 @@
           <span class="prefix"><i class='general foundicon-mail'></i></span>
         </div>
         <div class="ten mobile-three columns">
-          <%= email_field_tag :email, nil, placeholder: 'email@example.com' %>
+          <%= f.email_field :receiver_email, placeholder: 'email@example.com' %>
         </div>
       </div>
     </div>
@@ -86,7 +88,7 @@
           <span class="prefix"><i class='general foundicon-paper-clip'></i></span>
         </div>
         <div class="ten mobile-three columns">
-          <%= file_field_tag :file, class: 'input-text radius' %>
+          <%= f.file_field :binary_file, class: 'input-text radius' %>
         </div>
       </div>
     </div>

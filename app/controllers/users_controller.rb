@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   end
 
   def my_account
+    @bw_file = BwFile.new
+    @sent_files = BwFile.where user_id: current_user.id
   end
 
   def create

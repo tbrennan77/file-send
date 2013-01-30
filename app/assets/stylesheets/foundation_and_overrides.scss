@@ -120,3 +120,25 @@ ul.tabs-content {
   border-right: 1px solid #E6E6E6;
   border-left: 1px solid #E6E6E6;
 }
+input[type="checkbox"] {
+  display: none;
+}
+label {  
+  border:1px solid #CCC;
+  padding: 8px;
+
+}
+
+label.is_green {
+  border: 1px solid green;
+  color: green;
+  background: #cdeb8b; /* Old browsers */
+  background: -moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8b), color-stop(100%,#cdeb8b)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#cdeb8b',GradientType=0 ); /* IE6-9 */
+
+}

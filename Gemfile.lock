@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.11)
       actionpack (= 3.2.11)
@@ -67,7 +67,7 @@ GEM
     foundation-icons-sass-rails (2.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
-    fssm (0.2.9)
+    fssm (0.2.10)
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)

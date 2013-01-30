@@ -5,9 +5,9 @@ set :application, "bw_send"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-role :app, "66.147.244.65"
-role :web, "66.147.244.65"
-role :db, "66.147.244.65", :primary => true
+role :app, "74.220.218.124"
+role :web, "74.220.218.124"
+role :db, "74.220.218.124", :primary => true
 
 set :deploy_to, "/home8/boondoc4/rails_apps/bw_send"
 set :deploy_via, :remote_cache

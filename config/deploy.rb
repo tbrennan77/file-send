@@ -14,7 +14,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, :git
-set :repository, "ssh://boondoc4@redmine.boondockstaging.com/home8/boondoc4/www/git/pipeline_cms.git"
+set :repository, "ssh://boondoc4@redmine.boondockstaging.com/home8/boondoc4/www/git/bw_send.git"
 set :branch, "master"
 
 set :user, "boondoc4"

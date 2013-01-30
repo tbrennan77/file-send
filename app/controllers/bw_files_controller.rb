@@ -30,12 +30,13 @@ class BwFilesController < ApplicationController
   def find_email
     email = []
     if params[:bw_file][:email_ids]
-      email << 'd1@dillonhafer.com' if params[:bw_file][:email_ids].include?('1')
-      email << 'd2@dillonhafer.com' if params[:bw_file][:email_ids].include?('2')
-      email << 'd3@dillonhafer.com' if params[:bw_file][:email_ids].include?('3')
-      email << 'd4@dillonhafer.com' if params[:bw_file][:email_ids].include?('4')
+      email << 'cnagy@boondockwalker.com' if params[:bw_file][:email_ids].include?('1')
+      email << 'mnead@boondockwalker.com' if params[:bw_file][:email_ids].include?('2')
+      email << 'bwillse@boondockwalker.com' if params[:bw_file][:email_ids].include?('3')
+      email << 'jwadenpfuhl@boondockwalker.com' if params[:bw_file][:email_ids].include?('4')
       email << 'stipton@boondockwalker.com' if params[:bw_file][:email_ids].include?('5')
       email << 'dhafer@boondockwalker.com' if params[:bw_file][:email_ids].include?('6')
+      email << 'tbrennan@boondockwalker.com' if params[:bw_file][:email_ids].include?('7')
     end
     email.join(', ')
   end

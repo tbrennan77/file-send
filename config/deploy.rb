@@ -5,26 +5,28 @@ set :application, "bw_send"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-role :app, "74.220.218.124"
-role :web, "74.220.218.124"
-role :db, "74.220.218.124", :primary => true
+role :app, "50.116.23.78"
+role :web, "50.116.23.78"
+role :db, "50.116.23.78", :primary => true
 
-set :deploy_to, "/home8/boondoc4/rails_apps/bw_send"
+set :deploy_to, "/var/www/bw_send"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, :git
-set :repository, "ssh://boondoc4@redmine.boondockstaging.com/home8/boondoc4/www/git/bw_send.git"
+set :repository, "boondoc4@redmine.boondockstaging.com:/home8/boondoc4/www/git/bw_send.git"
 set :branch, "master"
 
-set :user, "boondoc4"
+set :user, "bw_send"
 
 after "deploy:update_code" do
-  run "ln -s #{shared_path}/production.rb #{release_path}/config/environments/production.rb"
-  run "rm -rf /home8/boondoc4/public_html/bw_send"
-  run "ln -s #{release_path}/public ~/public_html/bw_send"
-  #run "ln -s #{shared_path}/index.html ~/public_html/pipeline_cms/index.html"
-  #run "cd #{release_path} ; RAILS_ENV=production bundle exec rake assets:precompile --trace"
+  #run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+  #run "ln -s #{shared_path}/1001303134.pem #{release_path}/config/1001303134.pem"
+  #run "ln -s #{shared_path}/videos #{release_path}/public/videos"
+  run "cd #{release_path} ; RAILS_ENV=production bundle exec rake assets:precompile --trace"
+  # Fix group so cached javascripts and stylesheets can be generated
+  #run "chgrp FBCS #{release_path}/public/javascripts"
+  #run "chgrp FBCS #{release_path}/public/stylesheets"
 end
 
 namespace :deploy do

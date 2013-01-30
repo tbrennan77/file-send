@@ -11,6 +11,7 @@ gem 'capistrano'
 gem 'exception_notification'
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem "paperclip", "~> 3.0"
+gem 'capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.

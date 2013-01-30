@@ -2,7 +2,7 @@ BwUpload::Application.routes.draw do
 
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'my-account' => 'users#my_account', :as => 'my_account'
-
+  get 'downloads/:permalink' => 'bw_files#download', :as => 'download'
   resources :users
   resources :sessions
   resources :bw_files

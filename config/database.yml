@@ -21,5 +21,7 @@ test:
 production:
   adapter: postgresql
   database: boondoc4_pipeline
+  username: boondoc4
+  password: 3635Walker$
   pool: 5
   timeout: 5000

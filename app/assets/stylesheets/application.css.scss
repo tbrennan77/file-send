@@ -36,16 +36,16 @@ ul.small-row {
     }
   }
 }
-
+i.general {color: #e37f1d;}
  i p { 
-  font-size: 22px;
   display: inline;
   position: relative;
   top: -2px;
-  margin-left: 8px;
+  margin-left: 5px;
+  color: #333;
  }
 
-top-bar > ul .name img {margin-top:4px !important;}
+.top-bar > ul .name img {margin-top:10px !important;}
 
 .file-table {
   width: 100%;

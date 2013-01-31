@@ -27,18 +27,22 @@
                 <div class="nine columns centered">
                   <div class="row collapse">
                     <%= f.error_messages %>
-                    <h2 style="text-align: centered;">Send a file!</h2>
-                    <p class="lead">just choose your recipients</p>
+                    <span class="main-listing">
+                    <h2 style="text-align: centered;">Send us a file</h2>
+                    <p class="lead">by choosing your recipients</p>
+
+                    </span>
+                    <hr />
                     <div class="five columns">
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 1 %> Carrie Nagy</label>
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 2 %> Mark Nead</label>
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 3 %> Brian Willse</label>
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 7 %> Tim Brennan</label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 1 %> <p>Carrie Nagy</p></i></label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 2 %> <p>Mark Nead</p></i></label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 3 %> <p>Brian Willse</p></i></label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 7 %> <p>Tim Brennan</p></i></label>
                     </div>
                     <div class="five columns">
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 4 %> Jacob Wadenpfuhl</label>
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 5 %> Seth Tipton</label>
-                      <label><i class='general foundicon-mail'></i><%= check_box_tag "bw_file[email_ids][]", 6 %> Dillon Hafer</label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 4 %> <p>Jacob Wadenpfuhl</p></i></label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 5 %> <p>Seth Tipton</p></i></label>
+                      <label><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 6 %> <p>Dillon Hafer</p></i></label>
                     </div>
                   </div>
                 </div>
@@ -47,7 +51,7 @@
               <div class="row">
                 <div class="nine columns centered">
                   <div class="row collapse">
-                    <div class="twelve mobile-three columns centered">
+                    <div class="twelve columns centered">
                       <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
                     </div>
                   </div>
@@ -57,7 +61,7 @@
                 <div class="nine columns centered">
                   <div class="row collapse">
                     <div class="two mobile-one columns">
-                      <span class="prefix"><i class='general foundicon-paper-clip'></i></span>
+                      <span class="prefix" style="background: white;"><i class='general foundicon-paper-clip'></i></span>
                     </div>
                     <div class="ten mobile-three columns">
                       <%= f.file_field :binary_file, class: 'input-text radius' %>
@@ -77,8 +81,8 @@
        <script>
         $(document).ready(function() {
           $('input[type="checkbox"]').live('change', function(){
-            $(this).prev('i').toggleClass('foundicon-mail').toggleClass('foundicon-checkmark')
-            $(this).parent().toggleClass('is_green');
+            $(this).parent().toggleClass('foundicon-mail').toggleClass('foundicon-checkmark')
+            $(this).parent().parent().toggleClass('is_green');
           })
 
           $('#upload-button').live('click', function(){

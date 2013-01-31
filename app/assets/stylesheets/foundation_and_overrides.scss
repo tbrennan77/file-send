@@ -15,7 +15,7 @@
 
 // Colors Settings
 
-// $mainColor: #2ba6cb;
+ $mainColor: #E37F1D;
 // $secondaryColor: #e9e9e9;
 // $alertColor: #c60f13;
 // $successColor: #5da423;
@@ -31,7 +31,7 @@
 // $headerFontFamily: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $headerFontWeight: bold;
 // $headerFontColor: #222;
-// $bodyFontFamily: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$bodyFontFamily: "Nobile", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $bodyFontWeight: normal;
 // $bodyFontColor: $txtColor;
 
@@ -93,7 +93,7 @@
 // Top Bar Settings
 
  $topBarBgColor: #616161;
-// $topBarHeight: 35px;
+ $topBarHeight: 65px;
  $topBarBtmMargin: 0px;
 // $topBarTitleWeight: bold;
 // $topBarTitleSize: ms(1);
@@ -110,7 +110,6 @@
 
 body > .row {background: #F8F6EE;}
 body {background: #C9C9C9;}
-.header-nav {background: #616161 !important}
 
 dl.tabs {margin-bottom: 0;}
 ul.tabs-content {
@@ -126,12 +125,15 @@ input[type="checkbox"] {
 label {  
   border:1px solid #CCC;
   padding: 8px;
-
+  background: #FEFEFE;
+  padding-bottom: 4px;
 }
 
+label:hover {background: #EEE;}
+
 label.is_green {
-  border: 1px solid green;
-  color: green;
+  border: 1px solid green !important;
+  color: green !important;
   background: #cdeb8b; /* Old browsers */
   background: -moz-linear-gradient(top,  #cdeb8b 0%, #cdeb8b 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8b), color-stop(100%,#cdeb8b)); /* Chrome,Safari4+ */
@@ -140,5 +142,20 @@ label.is_green {
   background: -ms-linear-gradient(top,  #cdeb8b 0%,#cdeb8b 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #cdeb8b 0%,#cdeb8b 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8b', endColorstr='#cdeb8b',GradientType=0 ); /* IE6-9 */
+  i {
+    color: green;
+    p {color: green;}
+  }
+}
 
+.top-bar ul li.name {
+background: #616161;
+}
+
+body {background-image: url(/assets/bkgptrn.gif);}
+
+.main-listing h2, .main-listing p {
+  font-family: 'Nobile', Arial, Helvetica, sans-serif !important;
+  color: #5F5E5E;
+  text-align: center;
 }

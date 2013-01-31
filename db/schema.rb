@@ -11,11 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129223138) do
+ActiveRecord::Schema.define(:version => 20130131164417) do
 
   create_table "bw_files", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name"
     t.string   "permalink"
     t.string   "receiver_email"
     t.datetime "created_at",               :null => false
@@ -24,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20130129223138) do
     t.string   "binary_file_content_type"
     t.integer  "binary_file_file_size"
     t.datetime "binary_file_updated_at"
+    t.text     "name"
   end
 
   create_table "users", :force => true do |t|

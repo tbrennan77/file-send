@@ -94,13 +94,8 @@
 
     <% content_for :reveal_modal do %>
       <div id="myModal" class="reveal-modal [expand, xlarge, large, medium, small] centered">
-        <h2 style="text-align:center">uploading...</h2>
-        <p class="lead centered" style="
-    background-image: url(/assets/loading-bar.gif);
-    height: 71px;
-    background-position: 0px -45px;
-    background-repeat: no-repeat;margin: 0 auto;
-width: 360px;
-        "></p>
+        <h2 style="text-align:center; background: white;z-index:999;">uploading...</h2>
+        <p class="lead centered" style="width: 350px;margin: 0 auto;">
+          <%= image_tag "loading-bar.gif", style: 'width: 350px;position:relative;z-index:-999;top:-45px;' %></p>
       </div>
     <% end %>

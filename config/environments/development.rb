@@ -36,10 +36,11 @@ BwUpload::Application.configure do
   config.assets.debug = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address              => "mail.send.boondockwalker.com",
-  :port                 => 26,
-  :domain               => 'send.boondockwalker.com',
-  :user_name            => 'no-reply@send.boondockwalker.com',
-  :password             => '1qaz!QAZ',
-  :authentication       => 'plain' }
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => 'send.booondockwalker.com',
+  :user_name            => 'files.boondock@gmail.com',
+  :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
 end

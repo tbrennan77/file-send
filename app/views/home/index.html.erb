@@ -1,31 +1,11 @@
+<style>
+.errorExplanation h2 {display:none;}
+</style>
+
   <div class="row">
     <br>    
     <div class="twelve columns">
       <div class="row">
-    <!-- Thumbnails 
- 
-        <div class="three mobile-two columns">
-          <%= image_tag "step_1.png" %>
-          <h6 class="panel">1. Login/Sign up</h6>
-        </div>
- 
-        <div class="three mobile-two columns">
-          <%= image_tag "step_2.png" %>
-          <h6 class="panel">2. Click the send button</h6>
-        </div>
- 
-        <div class="three mobile-two columns">
-          <%= image_tag "step_3.png" %>
-          <h6 class="panel">3. Enter an email address</h6>
-        </div>
- 
-        <div class="three mobile-two columns">
-          <%= image_tag "step_4.png" %>
-          <h6 class="panel">4. Attatch a file</h6>
-        </div>
- 
-    End Thumbnails -->
- 
       </div>
     </div>
   </div>
@@ -46,6 +26,7 @@
               <div class="row">
                 <div class="nine columns centered">
                   <div class="row collapse">
+                    <%= f.error_messages %>
                     <h2 style="text-align: centered;">Send a file!</h2>
                     <p class="lead">just choose your recipients</p>
                     <div class="five columns">
@@ -63,6 +44,14 @@
                 </div>
               </div>
               <br>
+              <div class="row">
+                <div class="nine columns centered">
+                  <div class="row collapse">
+                    <div class="twelve mobile-three columns centered">
+                      <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
+                    </div>
+                  </div>
+                </div>
               <br>
               <div class="row">
                 <div class="nine columns centered">
@@ -74,7 +63,7 @@
                       <%= f.file_field :binary_file, class: 'input-text radius' %>
                       <br>
                     </div>
-                      <%= submit_tag "Send", class: 'blue button nice radius full-width' %>
+                      <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
                   </div>
                 </div>
               </div>
@@ -86,47 +75,32 @@
         </div>
  
        <script>
-        $('input[type="checkbox"]').live('change', function(){
-          $(this).prev('i').toggleClass('foundicon-mail').toggleClass('foundicon-checkmark')
-          $(this).parent().toggleClass('is_green');
+        $(document).ready(function() {
+          $('input[type="checkbox"]').live('change', function(){
+            $(this).prev('i').toggleClass('foundicon-mail').toggleClass('foundicon-checkmark')
+            $(this).parent().toggleClass('is_green');
+          })
+
+          $('#upload-button').live('click', function(){
+            $('#loading-bar-button').click()
+          });
         })
        </script>
+       <a id="loading-bar-button" data-reveal-id="myModal"></a>
  
     <!-- End Content -->
  
       </div>
 
     <% content_for :reveal_modal do %>
-      <div id="myModal" class="reveal-modal [expand, xlarge, large, medium, small]">
-        <h2>Login or sign up!</h2>
-        <p class="lead">and send files to your heart's content</p>
-        <%= form_for @user, :html => {:class => "nice"} do |f| %>
-          <%= f.error_messages %>
-          <%= f.label :email %>
-          <%= f.text_field :email, :placeholder => "me@boondock.com", :class => "input-text" %>
-
-          <%= f.label :password %>
-          <%= f.password_field :password, :placeholder => "••••••", :class => "input-text" %>
-
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, :placeholder => "••••••", :class => "input-text" %>
-
-          <%= f.submit "Join", :class => "yellow button nice radius" %>
-        <% end %>
-        <a class="close-reveal-modal">&#215;</a>
-
-        <h2>Login</h2>
-        <%= form_tag sessions_path, :class => "nice" do %>
-          <%= field_set_tag do %>
-            <%= label_tag "Username" %>
-            <%= text_field_tag :email, params[:email], :class => "input-text" %>
-
-            <%= label_tag :password %>
-            <%= password_field_tag :password, nil, :class => "input-text" %>
-
-          <%= submit_tag "Log in", :class => "blue button nice radius" %>
-          <br /><br />
-          <% end %>
-        <% end %>
+      <div id="myModal" class="reveal-modal [expand, xlarge, large, medium, small] centered">
+        <h2 style="text-align:center">uploading...</h2>
+        <p class="lead centered" style="
+    background-image: url(/assets/loading-bar.gif);
+    height: 71px;
+    background-position: 0px -45px;
+    background-repeat: no-repeat;margin: 0 auto;
+width: 360px;
+        "></p>
       </div>
     <% end %>

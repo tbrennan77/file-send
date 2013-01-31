@@ -3,12 +3,13 @@ class BwFilesController < ApplicationController
     @bw_file = BwFile.new params[:bw_file]
     @bw_file.user_id = current_user.id if current_user
     @bw_file.permalink = (0...50).map{ ('a'..'z').to_a[rand(26)] }.join
-    email = find_email
     if @bw_file.save
+      email = find_email
       Notifier.send_file(@bw_file, email).deliver
       redirect_to root_path, :notice => "File sent"
     else
-      redirect_to root_path, :notice => "something went wrong"
+      flash[:errors] =  "something went wrong"
+      render 'home/index'
     end
   end
 

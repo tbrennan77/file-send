@@ -3,3 +3,11 @@
 
 en:
   hello: "Hello world"
+en:
+ activerecord:
+    models:
+      bw_file: 
+    attributes:
+      bw_file:
+        binary_file: ""
+        email_ids: "Emails:"

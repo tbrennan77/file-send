@@ -96,6 +96,13 @@
     color: #505050; font-family: Arial; font-size: 14px; line-height: 150%;
 ">
                                                                 It looks like someone sent you a file. Use the link below to download it.
+                                                                <br>
+                                                                <br>
+                                                                <% if @bw_file.name %>
+                                                                <b>The sender also attached some notes:<br /></b>
+                                                                <br />
+                                                                <%= @bw_file.name %>
+                                                                <% end %>
                                                             </div>
                             </td>
                                                     </tr>

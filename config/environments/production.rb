@@ -68,9 +68,9 @@ BwUpload::Application.configure do
 config.action_mailer.smtp_settings = {
   :address              => "smtp.gmail.com",
   :port                 => 587,
-  :domain               => 'dillonhafer.com',
-  :user_name            => 'dh@dillonhafer.com',
-  :password             => 'aquilae7',
+  :domain               => 'send.booondockwalker.com',
+  :user_name            => 'files.boondock@gmail.com',
+  :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
 end

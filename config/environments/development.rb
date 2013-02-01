@@ -43,4 +43,5 @@ BwUpload::Application.configure do
   :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
+  config.action_mailer.perform_deliveries = false
 end

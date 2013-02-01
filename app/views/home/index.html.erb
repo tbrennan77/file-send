@@ -1,5 +1,12 @@
 <style>
 .errorExplanation h2 {display:none;}
+
+.checkbox-error {
+  border-color: #C60F13;
+  background-color: rgba(198, 15, 19, 0.1);
+}
+
+.red {color: red !important;}
 </style>
 
   <div class="row">
@@ -33,16 +40,17 @@
 
                     </span>
                     <hr />
+                    <label for="bw_file[email_ids][]" generated="true" class="error hide" style="">You must select at least one email.</label>
                     <div class="five columns">
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 1 %> <p>Carrie Nagy</p></i></label>
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 2 %> <p>Mark Nead</p></i></label>
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 3 %> <p>Brian Willse</p></i></label>
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 7 %> <p>Tim Brennan</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 1, nil, :class => 'email' %> <p>Carrie Nagy</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 2, nil, :class => 'email' %> <p>Mark Nead</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 3, nil, :class => 'email' %> <p>Brian Willse</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 7, nil, :class => 'email' %> <p>Tim Brennan</p></i></label>
                     </div>
                     <div class="five columns">
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 4 %> <p>Jacob Wadenpfuhl</p></i></label>
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 5 %> <p>Seth Tipton</p></i></label>
-                      <label class="radius"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 6 %> <p>Dillon Hafer</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 4, nil, :class => 'email' %> <p>Jacob Wadenpfuhl</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 5, nil, :class => 'email' %> <p>Seth Tipton</p></i></label>
+                      <label class="radius email-input"><i class='general foundicon-mail'><%= check_box_tag "bw_file[email_ids][]", 6, nil, :class => 'email' %> <p>Dillon Hafer</p></i></label>
                     </div>
                   </div>
                 </div>
@@ -85,12 +93,31 @@
             $(this).parent().parent().toggleClass('is_green');
           })
 
-          $('#upload-button').live('click', function(e){
-            if ($('#bw_file_binary_file').val()) {
-              $('#loading-bar-button').click();
+          $('.email').live('change', function() {
+            if ($('.email:checkbox:checked').length == 0) {
+              $('.error').show();
+              $('label.email-input').addClass('checkbox-error');
+              $('label.email-input i.general').removeClass('foundicon-mail').addClass('foundicon-remove').addClass('red')
+            } else {
+              $('label[for="bw_file[email_ids][]"].error').hide();
+              $('label.email-input').removeClass('checkbox-error');
+              $('label.email-input i.general').addClass('foundicon-mail').removeClass('foundicon-remove').removeClass('red')
+              $('label.email-input .email:checkbox:checked').parent().removeClass('foundicon-mail').addClass('foundicon-checkmark').parent().addClass('is_green')
             }
           });
-        })
+
+          $('#upload-button').live('click', function(e){
+            if ($('#bw_file_binary_file').val() && $('.email:checkbox:checked').length > 0) {
+              $('#loading-bar-button').click();
+            } else if ($('.email:checkbox:checked').length == 0) {
+              $('.error').show();
+              $('label.email-input').addClass('checkbox-error');
+              $('label.email-input i.general').removeClass('foundicon-mail').addClass('foundicon-remove').addClass('red')
+              e.preventDefault();
+            }
+          });
+        });
+
         $("#new_bw_file").validate();
        </script>
        <a id="loading-bar-button" data-reveal-id="myModal"></a>

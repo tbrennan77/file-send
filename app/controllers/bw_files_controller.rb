@@ -1,4 +1,6 @@
 class BwFilesController < ApplicationController
+  before_filter :authenticate, :only => %w{admin_create}
+
   def create
     @bw_file = BwFile.new params[:bw_file]
     @bw_file.user_id = current_user.id if current_user
@@ -13,6 +15,18 @@ class BwFilesController < ApplicationController
     end
   end
 
+  def admin_create
+    @bw_file = BwFile.new params[:bw_file]
+    @bw_file.permalink = (0...50).map{ ('a'..'z').to_a[rand(26)] }.join
+    if @bw_file.save
+      Notifier.send_file(@bw_file, @bw_file.receiver_email).deliver
+      redirect_to admin_path, :notice => "File sent"
+    else
+      flash[:errors] =  "something went wrong"
+      render 'home/admin'
+    end
+  end
+
   def destroy  
     bw_file = BwFile.find params[:id]
     bw_file.binary_file = nil
@@ -21,11 +35,14 @@ class BwFilesController < ApplicationController
   end
 
   def download
-    puts Dir.pwd
     bw_file = BwFile.find_by_permalink params[:permalink]
-    path = File.join(Dir.pwd, 'public', bw_file.binary_file.url(:original, false))
-    file = File.read path
-    send_data file, :filename => "#{bw_file.binary_file.original_filename}"
+    if bw_file
+      path = File.join(Dir.pwd, 'public', bw_file.binary_file.url(:original, false))
+      file = File.read path
+      send_data file, :filename => "#{bw_file.binary_file.original_filename}"
+    else
+      redirect_to missing_path
+    end
   end
 
   def find_email
@@ -40,5 +57,5 @@ class BwFilesController < ApplicationController
       email << 'tbrennan@boondockwalker.com' if params[:bw_file][:email_ids].include?('7')
     end
     email.join(', ')
-  end
+  end 
 end

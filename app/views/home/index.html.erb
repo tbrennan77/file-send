@@ -85,8 +85,10 @@
             $(this).parent().parent().toggleClass('is_green');
           })
 
-          $('#upload-button').live('click', function(){
-            $('#loading-bar-button').click()
+          $('#upload-button').live('click', function(e){
+            if ($('#bw_file_binary_file').val()) {
+              $('#loading-bar-button').click();
+            }
           });
         })
         $("#new_bw_file").validate();

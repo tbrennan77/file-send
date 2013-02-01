@@ -83,11 +83,14 @@
             $(this).parent().parent().toggleClass('is_green');
           })
 
-          $('#upload-button').live('click', function(){
-            $('#loading-bar-button').click()
+          $('#upload-button').live('click', function(e){
+            if ($('#bw_file_binary_file').val() && $('#bw_file_receiver_email').val() ) {
+              $('#loading-bar-button').click();
+            }
           });
-        })
-        $("#new_bw_file").validate();
+
+          $("#new_bw_file").validate();
+        });
        </script>
        <a id="loading-bar-button" data-reveal-id="myModal"></a>
  

@@ -1,0 +1,16 @@
+<div class="row fields">
+  <div class="nine columns centered">
+    <div class="row collapse">
+      <div class="two mobile-one columns">
+        <span class="prefix" style="background: white;"><i class='general foundicon-paper-clip'></i></span>
+      </div>
+      <div class="nine mobile-three columns">
+        <%= f.file_field :binary_file, class: 'input-text radius required' %>
+        <br>
+      </div>
+      <div class="one mobile-three columns">
+        <%= link_to_remove_fields "<span class=\"prefix delete_fields\" style=\"border:none;;\"><i class=\"general foundicon-remove\"></i></span>", f %>
+      </div>
+    </div>
+  </div>
+</div>

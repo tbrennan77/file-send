@@ -1,6 +1,15 @@
 <style>
+.delete_fields i {color:red;}
 .errorExplanation h2 {display:none;}
+
+.checkbox-error {
+  border-color: #C60F13;
+  background-color: rgba(198, 15, 19, 0.1);
+}
+
+.red {color: red !important;}
 </style>
+
 
   <div class="row">
     <br>    
@@ -54,29 +63,42 @@
                     </div>
                   </div>
                 </div>
+             
               <br>
               <div class="row">
                 <div class="nine columns centered">
-                  <div class="row collapse">
-                    <div class="two mobile-one columns">
-                      <span class="prefix" style="background: white;"><i class='general foundicon-paper-clip'></i></span>
-                    </div>
-                    <div class="ten mobile-three columns">
-                      <%= f.file_field :binary_file, class: 'input-text radius required' %>
-                      <br>
-                    </div>
-                      <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
-                  </div>
+                  <p><%= link_to_add_fields "Add another file", f, :bw_attachments, class: 'green button nice radius full-width small' %></p>
                 </div>
+              </div>
+
+              <%= f.fields_for :bw_attachments do |builder| %>
+                  <%= render 'bw_attachment_fields', :f => builder %>
+              <% end %>
+                
+                  <div id="submit_button" class="row">
+                <div class="nine columns centered">                
+                <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
+              </div>
               </div>
                 <br>
                 <br>
               <% end %>
             </div>
           </div>
+          </div>
         </div>
  
        <script>
+        function remove_fields(link) {
+          $(link).prev("input[type=hidden]").val("1");
+          $(link).closest(".fields").hide();
+        }
+
+        function add_fields(link, association, content) {
+          var new_id = new Date().getTime();
+          var regexp = new RegExp("new_" + association, "g")
+          $("#submit_button").before(content.replace(regexp, new_id));
+        }
         $(document).ready(function() {
           $('input[type="checkbox"]').live('change', function(){
             $(this).parent().toggleClass('foundicon-mail').toggleClass('foundicon-checkmark')
@@ -88,6 +110,7 @@
               $('#loading-bar-button').click();
             }
           });
+
 
           $("#new_bw_file").validate();
         });

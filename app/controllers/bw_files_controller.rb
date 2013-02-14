@@ -3,9 +3,8 @@ class BwFilesController < ApplicationController
 
   def create
     @bw_file = BwFile.new params[:bw_file]
-    @bw_file.user_id = current_user.id if current_user
-    @bw_file.permalink = (0...50).map{ ('a'..'z').to_a[rand(26)] }.join
     if @bw_file.save
+      @bw_file.bw_attachments.each { |a| a.create_permalink }
       email = find_email
       Notifier.send_file(@bw_file, email).deliver
       redirect_to root_path, :notice => "File sent"
@@ -17,8 +16,8 @@ class BwFilesController < ApplicationController
 
   def admin_create
     @bw_file = BwFile.new params[:bw_file]
-    @bw_file.permalink = (0...50).map{ ('a'..'z').to_a[rand(26)] }.join
     if @bw_file.save
+      @bw_file.bw_attachments.each { |a| a.create_permalink }
       Notifier.send_file(@bw_file, @bw_file.receiver_email).deliver
       redirect_to admin_path, :notice => "File sent"
     else
@@ -35,7 +34,7 @@ class BwFilesController < ApplicationController
   end
 
   def download
-    bw_file = BwFile.find_by_permalink params[:permalink]
+    bw_file = BwAttachment.find_by_permalink params[:permalink]
     if bw_file
       path = File.join(Dir.pwd, 'public', bw_file.binary_file.url(:original, false))
       file = File.read path

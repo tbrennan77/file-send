@@ -63,14 +63,14 @@
                                                                   </th>
                                                               </tr>
                                                               <% @bw_file.bw_attachments.each do |attachment| %>
-                                                              <tr style="border: 1px solid #DDD;font-weight: bold;">
+                                                              <tr style="border: 1px solid #DDD;font-weight: bold;" style="background: <%= cycle("#EEEEEE", "#EFEFEF") %>">
                                                                   <td valign="top" style="border: 1px solid #DDD;border-top: none;border-right: none;">
                                                                     <%= Date.today.strftime("%b %d, %Y") %>
                                                                   </td>
-                                                                  <td valign="top" style="border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;">
+                                                                  <td valign="top" style="border-bottom: 1px solid #DDD;border-right: none;">
                                                                     <%= attachment.binary_file.original_filename %>
                                                                   </td>
-                                                                  <td>
+                                                                  <td style="border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;">
                                                                     <a href="http://send.boondockwalker.com/downloads/<%= attachment.permalink %>" target="_blank" style="    color: #369; font-family: Arial; font-size: 15px; font-weight: bold; letter-spacing: -.5px; line-height: 100%; text-align: center;    padding: 4px 12px; text-decoration: underline;">
                                                                             Download
                                                                     </a>
@@ -83,7 +83,7 @@
                                                     <tr>
                                                         <td valign="top" style="    border-left: 1px solid #DDD;border-right: 1px solid #DDD;">
                                                             <div style="color: #505050; font-family: Arial; font-size: 14px; line-height: 150%;">
-                                                                It looks like someone sent you a file. Use the link below to download it.
+                                                                It looks like someone sent you a file. Use the <%= pluralize(@bw_file.bw_attachments.count, 'link') %> above to download it.
                                                                 <br>
                                                                 <br>
                                                                 <% unless @bw_file.name.blank? %>

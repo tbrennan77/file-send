@@ -1,6 +1,6 @@
 class CreateBinaryFiles < ActiveRecord::Migration
   def change
-    create_table :bw_attachment do |t|
+    create_table :bw_attachments do |t|
       t.references :bw_file
       t.string :permalink
       t.timestamps

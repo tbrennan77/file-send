@@ -106,7 +106,7 @@
           })
 
           $('#upload-button').live('click', function(e){
-            if ($('#bw_file_binary_file').val() && $('#bw_file_receiver_email').val() ) {
+            if ($('.fields:visible input[type="file"]').val() && $('#bw_file_receiver_email').val() ) {
               $('#loading-bar-button').click();
             }
           });

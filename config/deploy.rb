@@ -23,7 +23,7 @@ after "deploy:update_code" do
   #run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
   #run "ln -s #{shared_path}/1001303134.pem #{release_path}/config/1001303134.pem"
   #run "ln -s #{shared_path}/videos #{release_path}/public/videos"
-  run "cd #{release_path} ; RAILS_ENV=production bundle exec rake assets:precompile --trace"
+  #run "cd #{release_path} ; RAILS_ENV=production bundle exec rake assets:precompile --trace"
   # Fix group so cached javascripts and stylesheets can be generated
   #run "chgrp FBCS #{release_path}/public/javascripts"
   #run "chgrp FBCS #{release_path}/public/stylesheets"
@@ -36,5 +36,9 @@ namespace :deploy do
   
   task :restart, :roles => :app do
     run "touch #{File.join(current_path, "tmp", "restart.txt")}"
+  end
+
+  task :precompile do
+    run "cd #{current_path} ; RAILS_ENV=production bundle exec rake assets:precompile --trace"
   end
 end

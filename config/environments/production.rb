@@ -65,12 +65,13 @@ BwUpload::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => 'send.booondockwalker.com',
-  :user_name            => 'files.boondock@gmail.com',
-  :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
-  :authentication       => 'plain',
-  :enable_starttls_auto => true  }
+  config.action_mailer.smtp_settings = {
+    :address              => "mail.boondockwalkerstaging.com",
+    :port                 => 26,
+    :domain               => 'send.booondockwalkerstaging.com',
+    :user_name            => 'send@boondockwalkerstaging.com',
+    :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
+    :authentication       => 'plain',
+    :enable_starttls_auto => false
+  }
 end

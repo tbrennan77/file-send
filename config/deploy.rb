@@ -21,6 +21,7 @@ set :user, "boondoc7"
 
 after "deploy:update_code" do
   run "ln -s #{shared_path}/database.yml #{release_path}/config/database.yml"
+  run "rm -rf /home6/boondoc7/public_html/send"
   run "ln -s #{release_path}/public /home6/boondoc7/public_html/send"
   run "cd #{release_path} ; RAILS_ENV=production bundle exec rake assets:precompile --trace"
 end

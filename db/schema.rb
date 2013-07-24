@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130214192947) do
 
-  create_table "bw_attachment", :force => true do |t|
+  create_table "bw_attachments", :force => true do |t|
     t.integer  "bw_file_id"
     t.string   "permalink"
     t.datetime "created_at",               :null => false

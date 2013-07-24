@@ -17,7 +17,7 @@
         <% bw_file.bw_attachments.each do |attachment| %>
         <tr style="border: 1px solid #DDD;font-weight: bold;" style="background: <%= cycle("#EEEEEE", "#EFEFEF") %>">
           <td valign="top" style="border: 1px solid #DDD;border-top: none;border-right: none;">
-            <%= Date.today.strftime("%b %d, %Y") %>
+            <%= attachment.created_at.strftime("%b %d, %Y") %>
           </td>
           <td valign="top" style="border-bottom: 1px solid #DDD;border-right: none;">
             <%= attachment.binary_file.original_filename %>

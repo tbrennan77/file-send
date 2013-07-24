@@ -1,0 +1,35 @@
+<br />
+<br />
+  <% @files.each do |bw_file| %>
+    <table border="0" cellpadding="10" cellspacing="0" width="100%">
+      <tbody>
+        <tr style="border: 1px solid #DDD;">
+          <th scope="col" valign="top" width="25%" style="background-color: #D8E2EA; color: #369; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #DDD;border-right: none;">
+            DATE
+          </th>
+          <th scope="col" valign="top" width="50%" style="background-color: #D8E2EA; color: #369; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #DDD;border-left: none;">
+            FILE NAME
+          </th>
+          <th style="background-color: #D8E2EA; color: red; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: right;padding-right: 8px;border: 1px solid #DDD;border-left: none;">
+            <%= link_to "Delete", bw_file_path(bw_file), method: 'delete', data: {confirm: "Are you sure?"}, style: 'color:red' %>
+          </th>
+        </tr>
+        <% bw_file.bw_attachments.each do |attachment| %>
+        <tr style="border: 1px solid #DDD;font-weight: bold;" style="background: <%= cycle("#EEEEEE", "#EFEFEF") %>">
+          <td valign="top" style="border: 1px solid #DDD;border-top: none;border-right: none;">
+            <%= Date.today.strftime("%b %d, %Y") %>
+          </td>
+          <td valign="top" style="border-bottom: 1px solid #DDD;border-right: none;">
+            <%= attachment.binary_file.original_filename %>
+          </td>
+          <td style="border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;">
+            <a href="/downloads/<%= attachment.permalink %>" target="_blank" style="    color: #369; font-family: Arial; font-size: 15px; font-weight: bold; letter-spacing: -.5px; line-height: 100%; text-align: center;    padding: 4px 12px; text-decoration: underline;">
+              Download
+            </a>
+            <%= attachment.binary_file_file_size.to(:mb) %>
+          </td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
+<% end %>

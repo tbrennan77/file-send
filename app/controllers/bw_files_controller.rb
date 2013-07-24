@@ -1,5 +1,9 @@
 class BwFilesController < ApplicationController
-  before_filter :authenticate, :only => %w{admin_create}
+  before_filter :authenticate, :only => %w{admin_create index}
+
+  def index
+    @files = BwFile.order(:created_at)
+  end
 
   def create
     @bw_file = BwFile.new params[:bw_file]
@@ -28,9 +32,9 @@ class BwFilesController < ApplicationController
 
   def destroy  
     bw_file = BwFile.find params[:id]
-    bw_file.binary_file = nil
-    bw_file.save
-    bw_file.destroy  
+    bw_file.bw_attachments.each { |a| a.destroy }    
+    bw_file.destroy
+    redirect_to '/files'
   end
 
   def download

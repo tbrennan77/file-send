@@ -7,6 +7,8 @@ BwUpload::Application.routes.draw do
   resources :users
   resources :sessions
   resources :bw_files
+
+  get '/files' => 'bw_files#index'
   get '/admin' => 'home#admin', :as => 'admin'
   match '/admin-create' => 'bw_files#admin_create', :as => 'admin_create'
   # The priority is based upon order of creation:

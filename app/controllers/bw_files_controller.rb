@@ -2,7 +2,7 @@ class BwFilesController < ApplicationController
   before_filter :authenticate, :only => %w{admin_create index}
 
   def index
-    @files = BwFile.order(:created_at)
+    @files = BwFile.order('id DESC')
   end
 
   def create

@@ -1,28 +1,19 @@
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <style>input {display:inline-block !important;}</style><![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" lang="en"> <style>input {display:inline-block !important;}</style><![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" lang="en"> <style>input {display:inline-block !important;}</style><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8" />
-  <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
-  <!-- Uncomment to make IE8 render like IE7 -->
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
-  
-  <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />  
-  <title><%= content_for?(:title) ? yield(:title) : "BW Upload" %></title>
-  
-  <!-- Included CSS Files -->
-  <%= stylesheet_link_tag    "application" %>
-  
-  <!-- Included JS Files  -->
-  <%= javascript_include_tag "application" %>
-  
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= content_for?(:title) ? yield(:title) : "BW Upload" %></title>  
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />        
+
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">  
+    <!-- Set the viewport width to device width for mobile -->
+    <%= stylesheet_link_tag "application" %>    
+    <%= javascript_include_tag "vendor/modernizr" %>
+    
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
   <% if flash[:notice] %>
       <div class='alert-box success'><%= flash[:notice] %></div>
     <% end %>
@@ -30,7 +21,7 @@
       <div class='alert-box error'><%= flash[:error] %></div>
   <% end %>
   
-      <nav class="top-bar ">
+      <nav class="top-bar" style='margin-left: 0'>
         <ul>
           <li class="name" style="background:##616161 !important"><h1><%= link_to image_tag("header_logo.png"), root_path %></h1></li>
         </ul>
@@ -50,21 +41,23 @@
           </ul>
         </section>
     </nav>
+  
     <!-- Navigation -->
   <div class="row header-nav">
-    <div class="twelve columns">
+    <div class="large-12 columns">
  </div>
  </div>
     <!-- End Navigation -->
  
  <div class="row">
-    <div class="twelve columns">
+    <div class="large-12 columns">
      <%= yield %>
    </div>
  </div>
  
     <!-- Footer -->
- 
+    <%= javascript_include_tag "application" %>    
+    <script><%= yield(:ready) %></script>
   
 
     <!-- End Footer -->

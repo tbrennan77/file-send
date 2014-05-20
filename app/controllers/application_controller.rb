@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    unless request.ip == '98.103.86.54'
+    unless request.ip == '69.54.59.151' || Rails.env == 'development'
       authenticate_or_request_with_http_basic do |username, password|
         username == "boondock" && password == "3635Walker"
       end

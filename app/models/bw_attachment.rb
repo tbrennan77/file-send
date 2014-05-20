@@ -1,9 +1,6 @@
-class BwAttachment < ActiveRecord::Base
-  belongs_to :bw_file
-  attr_accessible :binary_file, :permalink
+class BwAttachment < ActiveRecord::Base  
+  belongs_to :bw_file  
   has_attached_file :binary_file
-
-  def create_permalink
-    self.update_attributes :permalink => SecureRandom.urlsafe_base64
-  end
+  validates_attachment :binary_file,    
+    presence: true
 end

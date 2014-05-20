@@ -6,12 +6,11 @@ class BwFilesController < ApplicationController
   end
 
   def create
-    @bw_file = BwFile.new params[:bw_file]
-    if @bw_file.save
-      @bw_file.bw_attachments.each { |a| a.create_permalink }
+    @bw_file = BwFile.new(bw_file_params)
+    if @bw_file.save      
       email = find_email
       Notifier.send_file(@bw_file, email).deliver
-      redirect_to root_path, :notice => "File sent"
+      redirect_to root_path, notice: "File sent"
     else
       flash[:errors] =  "something went wrong"
       render 'home/index'
@@ -20,8 +19,7 @@ class BwFilesController < ApplicationController
 
   def admin_create
     @bw_file = BwFile.new params[:bw_file]
-    if @bw_file.save
-      @bw_file.bw_attachments.each { |a| a.create_permalink }
+    if @bw_file.save      
       Notifier.send_file(@bw_file, @bw_file.receiver_email).deliver
       redirect_to admin_path, :notice => "File sent"
     else
@@ -37,17 +35,6 @@ class BwFilesController < ApplicationController
     redirect_to '/files'
   end
 
-  def download
-    bw_file = BwAttachment.find_by_permalink params[:permalink]
-    if bw_file
-      path = File.join(Dir.pwd, 'public', bw_file.binary_file.url(:original, false))
-      file = File.read path
-      send_data file, :filename => "#{bw_file.binary_file.original_filename}"
-    else
-      redirect_to missing_path
-    end
-  end
-
   def find_email
     email = []
     if params[:bw_file][:email_ids]
@@ -61,4 +48,8 @@ class BwFilesController < ApplicationController
     end
     email.join(', ')
   end 
+
+  def bw_file_params
+    params.require(:bw_file).permit(:name, bw_attachments_attributes: [:id, :binary_file, :_destroy], email_ids: [])
+  end
 end

@@ -84,7 +84,7 @@ BwUpload::Application.configure do
     },
     bucket: ENV['S3_BUCKET_NAME'],
     url: ':s3_alias_url',
-    s3_host_alias:'fiels-cdn.boondockwalker.com',    
+    s3_host_alias:'files-cdn.boondockwalker.com',    
     path: '/downloads/:hash.:extension',
     :hash_secret => ENV['S3_HASH_SECRET']    
   }

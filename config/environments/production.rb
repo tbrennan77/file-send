@@ -93,7 +93,7 @@ BwUpload::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "mail.boondockwalkerstaging.com",
     :port                 => 26,
-    :domain               => 'send.booondockwalkerstaging.com',
+    :domain               => 'send.boondockwalker.com',
     :user_name            => 'send@boondockwalkerstaging.com',
     :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
     :authentication       => 'plain',

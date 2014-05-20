@@ -18,7 +18,7 @@ class BwFilesController < ApplicationController
   end
 
   def admin_create
-    @bw_file = BwFile.new params[:bw_file]
+    @bw_file = BwFile.new(bw_file_params)
     if @bw_file.save      
       Notifier.send_file(@bw_file, @bw_file.receiver_email).deliver
       redirect_to admin_path, :notice => "File sent"
@@ -50,6 +50,6 @@ class BwFilesController < ApplicationController
   end 
 
   def bw_file_params
-    params.require(:bw_file).permit(:name, bw_attachments_attributes: [:id, :binary_file, :_destroy], email_ids: [])
+    params.require(:bw_file).permit(:name, :receiver_email, bw_attachments_attributes: [:id, :binary_file, :_destroy], email_ids: [])
   end
 end

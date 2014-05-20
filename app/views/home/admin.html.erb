@@ -10,121 +10,107 @@
 .red {color: red !important;}
 </style>
 
+<style>
+  .delete_fields i {color:red;}
+  .errorExplanation h2 {display:none;}
 
-  <div class="row">
-    <br>    
-    <div class="twelve columns">
+  .checkbox-error {
+    border-color: #C60F13;
+    background-color: rgba(198, 15, 19, 0.1);
+  }
+  .red {color: red !important;}
+</style>  
+
+<!-- Content -->
+<div class="row"> 
+  <div class="large-8 columns large-centered">
+    <div class="panel radius">
+      <div id="myModal" class="small" style='display:none; background: white;padding-top: 38px;'>
+        <span class="main-listing">
+          <h2 style="text-align: large-centered;">Please be patient</h2>
+          <p class="lead">upload time depends on your connection</p>
+        </span>
+        <h2 style="text-align:center; background: white;z-index:999;">uploading files...</h2>
+        <p class="lead centered" style='width: 360px;height: 100px;margin: 0 auto; background: url("<%= asset_path "loading-bar.gif" %>") no-repeat 0 -46px transparent;'></p>
+      </div>
       <div class="row">
+        <%= nested_form_for @bw_file, url: admin_create_path, html: { multipart: true } do |f| %> 
+          <%= hidden_field_tag "bw_file[email_ids][]", 6 %>         
+          <div class="row">
+            <div class="large-9 columns large-centered">
+              <div class="row">                    
+                <span class="main-listing">
+                  <h2 style="text-align: large-centered;">Send someone a file</h2>
+                  <p class="lead">by choosing your recipients</p>
+                </span>
+                <hr />
+                <h1 class='text-center'><label for="bw_file[email_ids][]" class="error-message alert button radius" style='display:none'>You must select at least one email.</label></h1>
+                <%= f.error_messages %>
+                <div class="large-12 columns">                      
+                  <%= f.text_field :receiver_email, class: 'input-text radius required', placeholder: 'one@example.com, two@example.com...' %>
+                </div>                
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="large-9 columns large-centered">
+              <div class="row collapse">
+                <div class="large-12 columns large-centered">
+                  <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
+                </div>
+              </div>
+            </div>
+            <br>
+            
+            <div id='attachments'>
+              <%= render partial: 'home/bw_attachment_fields', locals: {f: f} %>
+            </div>
+
+            <div class="row fields">
+              <div class="large-9 columns large-centered">
+                <%= f.link_to_add 'Add another file', :bw_attachments, data: { target: "#attachments" }, class: 'success button radius tiny' %>
+              </div>
+            </div>
+            <div id="submit_button" class="row">
+              <div class="large-9 columns large-centered">                
+                <hr />
+                <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
- 
- <br>
- <br>
- 
-  <div class="row">
-    <div class="twelve columns">
-      <div class="row">
- 
-    <!-- Content -->
- 
-        <div class="eight columns centered">
-          <div class="panel radius">
-            <div class="row">
-              <%= form_for @bw_file, :url => admin_create_path, :html => { :multipart => true } do |f| %>
-              <%= hidden_field_tag "bw_file[email_ids][]", 1 %>
-              <div class="row">
-                <div class="nine columns centered">
-                  <div class="row collapse">
-                    <%= f.error_messages %>
-                    <span class="main-listing">
-                    <h2 style="text-align: centered;">Send a file</h2>
-                    <p class="lead">by typing an email address</p>
-                    <hr />
-                </div>
-              </div>
-              <div class="row">
-                <div class="nine columns centered">
-                  <div class="row collapse">
-                    <div class="two mobile-one columns">
-                      <span class="prefix" style="background: white;"><i class='general foundicon-mail'></i></span>
-                    </div>
-                    <div class="ten mobile-three columns">
-                      <%= f.text_field :receiver_email, class: 'input-text radius required', placeholder: 'one@example.com, two@example.com...' %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="nine columns centered">
-                  <div class="row collapse">
-                    <div class="twelve columns centered">
-                      <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
-                    </div>
-                  </div>
-                </div>
-             
-              <br>
-              <div class="row">
-                <div class="nine columns centered">
-                  <p><%= link_to_add_fields "Add another file", f, :bw_attachments, class: 'green button nice radius full-width small' %></p>
-                </div>
-              </div>
+</div>
 
-              <%= f.fields_for :bw_attachments do |builder| %>
-                  <%= render 'bw_attachment_fields', :f => builder %>
-              <% end %>
-                
-                  <div id="submit_button" class="row">
-                <div class="nine columns centered">                
-                <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
-              </div>
-              </div>
-                <br>
-                <br>
-              <% end %>
-            </div>
-          </div>
-          </div>
-        </div>
- 
-       <script>
-        function remove_fields(link) {
-          $(link).prev("input[type=hidden]").val("1");
-          $(link).closest(".fields").hide();
-        }
+<!-- End Content -->
+<% content_for :ready do %>
+$('#upload-button').on('click', function(e){
+  if ($('.fields:visible input[type="file"]').val() && $('#bw_file_receiver_email').val() ) {
+    $('#myModal').show();
+    $('#myModal').parent().parent().parent().find('.row').hide();
+  }
+});
 
-        function add_fields(link, association, content) {
-          var new_id = new Date().getTime();
-          var regexp = new RegExp("new_" + association, "g")
-          $("#submit_button").before(content.replace(regexp, new_id));
-        }
-        $(document).ready(function() {
-          $('input[type="checkbox"]').live('change', function(){
-            $(this).parent().toggleClass('foundicon-mail').toggleClass('foundicon-checkmark')
-            $(this).parent().parent().toggleClass('is_green');
-          })
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".fields").hide();
+}
 
-          $('#upload-button').live('click', function(e){
-            if ($('.fields:visible input[type="file"]').val() && $('#bw_file_receiver_email').val() ) {
-              $('#loading-bar-button').click();
-            }
-          });
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $("#submit_button").before(content.replace(regexp, new_id));
+}
 
-
-          $("#new_bw_file").validate();
-        });
-       </script>
-       <a id="loading-bar-button" data-reveal-id="myModal"></a>
- 
-    <!-- End Content -->
- 
-      </div>
-
-    <% content_for :reveal_modal do %>
-      <div id="myModal" class="reveal-modal [expand, xlarge, large, medium, small] centered">
-        <h2 style="text-align:center; background: white;z-index:999;">uploading...</h2>
-        <p class="lead centered" style="width: 350px;margin: 0 auto;">
-          <%= image_tag "loading-bar.gif", style: 'width: 350px;position:relative;z-index:-999;top:-45px;' %></p>
-      </div>
-    <% end %>
+$(document).ready(function() {
+  $('input[type="checkbox"]').on('change', function() {
+    $(this).parent().toggleClass('fi-mail').toggleClass('fi-check');
+    $(this).parent().parent().toggleClass('is_green');
+  });
+});
+<% end %>

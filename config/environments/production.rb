@@ -89,14 +89,5 @@ BwUpload::Application.configure do
     :hash_secret => ENV['S3_HASH_SECRET']    
   }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "mail.boondockwalkerstaging.com",
-    :port                 => 26,
-    :domain               => 'send.boondockwalker.com',
-    :user_name            => 'send@boondockwalkerstaging.com',
-    :password             => 'BJ4lXDDF0tf65cBUQBT7BQ==',
-    :authentication       => 'plain',
-    :enable_starttls_auto => false
-  }
+  config.action_mailer.delivery_method = :smtp  
 end

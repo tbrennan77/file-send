@@ -48,13 +48,6 @@ $(document).on('nested:fieldRemoved', function(event){
   $(field).remove();
 });
 
-$(document).ready(function() {
-  $('input[type="checkbox"]').on('change', function() {
-    $(this).parent().toggleClass('fi-mail').toggleClass('fi-check');
-    $(this).parent().parent().toggleClass('is_green');
-  });
-});
-
 $('a.see-more').on('click', function(event) {
   var hidden_sermons = $('table.hide').slice(0,10);
   if (hidden_sermons.length > 0) {    

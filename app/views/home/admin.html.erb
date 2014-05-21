@@ -10,7 +10,7 @@
   <br />
 </div>
 
-<%= nested_form_for @bw_file, url: admin_create_path, html: { multipart: true } do |f| %> 
+<%= nested_form_for @bw_file, url: admin_create_path, html: { multipart: true, class: 'fadeIn' } do |f| %> 
   <%= hidden_field_tag "bw_file[email_ids][]", 6 %>         
   <div class="row">
     <span class="main-listing">
@@ -43,7 +43,7 @@
   <h4 class='subheader'>Previous File Uploads</h4>
 
   <% @files.each_with_index do |bw_file, index| %>
-    <table border="0" cellpadding="10" cellspacing="0" width="100%" class='<%= "hide" if index > 4 %>'>
+    <table border="0" cellpadding="10" cellspacing="0" width="100%" class='<%= "hide" if index > 0 %>'>
       <tbody>
         <tr style="">
           <th scope="col" valign="top" width="25%" style="font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #CCC;border-right: none;">

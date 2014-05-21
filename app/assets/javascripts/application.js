@@ -49,13 +49,17 @@ $(document).on('nested:fieldRemoved', function(event){
 });
 
 $('a.see-more').on('click', function(event) {
-  var hidden_sermons = $('table.hide').slice(0,10);
+  var hidden_sermons = $('table.hide').slice(0,5);
   if (hidden_sermons.length > 0) {    
     $(hidden_sermons).each(function() {
       $(this).removeClass('hide');
       $(this).addClass('fadeIn');
     });
   } else {
+    $(this).fadeOut();
+  }
+  var hidden_sermons = $('table.hide').slice(0,5);
+  if (hidden_sermons.length == 0) {    
     $(this).fadeOut();
   }
   event.preventDefault();

@@ -33,6 +33,6 @@ BwUpload::Application.configure do
   
   config.assets.debug = true
   
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = false
   config.action_mailer.delivery_method = :smtp  
 end

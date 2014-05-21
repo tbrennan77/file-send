@@ -31,7 +31,8 @@
           <p class="lead">upload time depends on your connection</p>
         </span>
         <h2 style="text-align:center; background: white;z-index:999;">uploading files...</h2>
-        <p class="lead centered" style='width: 360px;height: 100px;margin: 0 auto; background: url("<%= asset_path "loading-bar.gif" %>") no-repeat 0 -46px transparent;'></p>
+        <p class='text-center'><progress id='p' value='1' max='1000' style='width:60%'><span>0</span>%</progress></p>
+        <br />        
       </div>
       <div class="row">
         <%= nested_form_for @bw_file, url: admin_create_path, html: { multipart: true } do |f| %> 
@@ -89,10 +90,37 @@
 
 <!-- End Content -->
 <% content_for :ready do %>
+var pBar = document.getElementById('p');
+var updateProgress = function(value) {
+  pBar.value = value;  
+};
+p = 1;
+
+function fakeUpload() {
+  setInterval( function() { 
+    updateProgress(p); 
+    if (p > 500) {
+      p = p+0.5;        
+    } else {
+      p = p+1;
+    }
+  }, 100);    
+}
+
+var reader = new FileReader();
+reader.addEventListener('loadstart', function(evt) {
+  if (evt.lengthComputable) p.max = evt.total;
+}, false);
+
+reader.addEventListener('progress', function(evt) {
+  if (evt.lengthComputable) p.value = evt.loaded;
+}, false);
+
 $('#upload-button').on('click', function(e){
   if ($('.fields:visible input[type="file"]').val() && $('#bw_file_receiver_email').val() ) {
     $('#myModal').show();
-    $('#myModal').parent().parent().parent().find('.row').hide();
+    $('#myModal').parent().parent().parent().find('.row').hide();    
+    fakeUpload();
   }
 });
 

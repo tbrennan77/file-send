@@ -1,3 +1,4 @@
+<br />
 <!-- Content -->
 <div id="myModal" class="small" style='display:none; background: white;padding-top: 38px;'>
   <span class="main-listing">
@@ -33,7 +34,7 @@
       <%= f.error_messages %>
       <%= f.text_field :receiver_email, class: 'input-text radius required', placeholder: 'one@example.com, two@example.com...' %>
       <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>        
-      <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius expand' %>
+      <%= submit_tag "Send", id: 'upload-button', class: 'button radius expand' %>
     </div>
   </div>  
 <% end %>
@@ -44,26 +45,26 @@
   <% @files.each_with_index do |bw_file, index| %>
     <table border="0" cellpadding="10" cellspacing="0" width="100%" class='<%= "hide" if index > 4 %>'>
       <tbody>
-        <tr style="border: 1px solid #DDD;">
-          <th scope="col" valign="top" width="25%" style="background-color: #D8E2EA; color: #369; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #DDD;border-right: none;">
+        <tr style="">
+          <th scope="col" valign="top" width="25%" style="font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #CCC;border-right: none;">
             DATE
           </th>
-          <th scope="col" valign="top" width="50%" style="background-color: #D8E2EA; color: #369; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #DDD;border-left: none;">
+          <th scope="col" valign="top" width="50%" style="font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #CCC;border-left: none;border-right:none">
             FILE NAME
           </th>
-          <th style="background-color: #D8E2EA; color: red; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: right;padding-right: 8px;border: 1px solid #DDD;border-left: none;">
-            <%= link_to "Delete", bw_file_path(bw_file), method: 'delete', data: {confirm: "Are you sure?"}, style: 'color:red' %>
+          <th style="color: red; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: right;padding-right: 8px;border: 1px solid #CCC;border-left: none;">
+            <%= link_to "Delete", bw_file_path(bw_file), method: 'delete', data: {confirm: "Are you sure?"}, class: 'tiny alert label radius' %>
           </th>
         </tr>
         <% bw_file.bw_attachments.each do |attachment| %>
-          <tr style="border: 1px solid #DDD;font-weight: bold;" style="background: <%= cycle("#EEEEEE", "#EFEFEF") %>">
-            <td valign="top" style="border: 1px solid #DDD;border-top: none;border-right: none;">
+          <tr style="border: 1px solid #CCC;font-weight: bold;" style="background: <%= cycle("#EEEEEE", "#EFEFEF") %>">
+            <td valign="top" style="border: 1px solid #CCC;border-top: none;border-right: none;">
               <%= attachment.created_at.strftime("%b %d, %Y") %>
             </td>
-            <td valign="top" style="border-bottom: 1px solid #DDD;border-right: none;">
+            <td valign="top" style="border-bottom: 1px solid #CCC;border-right: none;">
               <%= attachment.binary_file.original_filename %>
             </td>
-            <td style="border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;">
+            <td style="border-bottom: 1px solid #CCC;border-right: 1px solid #CCC;">
               <a href="<%= attachment.binary_file.url %>" target="_blank" style="    color: #369; font-family: Arial; font-size: 15px; font-weight: bold; letter-spacing: -.5px; line-height: 100%; text-align: center;    padding: 4px 12px; text-decoration: underline;">
                 Download
               </a>
@@ -76,7 +77,7 @@
   <% end %>
 
 <div class='large-12 columns text-center'>
-  <a href='#' class='see-more text-center small center blue button radius'>See more files</a>
+  <a href='#' class='see-more text-center tiny center blue button radius'>See more files</a>
 </div>
 
 <!-- End Content -->

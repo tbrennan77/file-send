@@ -32,7 +32,7 @@ class BwFilesController < ApplicationController
     bw_file = BwFile.find params[:id]
     bw_file.bw_attachments.each { |a| a.destroy }    
     bw_file.destroy
-    redirect_to '/files'
+    redirect_to '/admin'
   end
 
   def find_email

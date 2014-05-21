@@ -9,5 +9,6 @@ class HomeController < ApplicationController
   def admin
     @bw_file = BwFile.new
     @bw_file.bw_attachments.build
+    @files = BwFile.order('id DESC')
   end
 end

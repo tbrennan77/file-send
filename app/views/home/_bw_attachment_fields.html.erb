@@ -1,18 +1,15 @@
 <%= f.fields_for :bw_attachments, :wrapper => false do |attachment| %>  
-<div class="row fields">
-  <div class="large-9 columns large-centered">
-    <div class="row collapse">
-      <div class="small-3 large-1 columns">
-        <span class="prefix"><i class='fi-paperclip'></i></span>
-      </div>
-      <div class="small-6 large-8 columns">
-        <%= attachment.file_field :binary_file, required:'' %>
-        <br>
-      </div>
-      <div class="large-3 small-3 columns text-center">
-        <%= attachment.link_to_remove "remove file", data: { target: "#attachments" }, class: 'alert tiny button radius' %>
-      </div>
+  <div class="row collapse fields">
+    <div class="small-3 large-2 columns">
+      <span class="prefix"><i class='fi-paperclip'></i></span>
+    </div>
+    <div class="small-6 large-7 columns">
+      <%= attachment.file_field :binary_file, required:'' %>
+      <br>
+    </div>
+    <div class="large-3 small-3 columns text-center">
+      <%= attachment.link_to_remove "×", class: 'alert tiny button radius' %>
     </div>
   </div>
-</div>
 <% end %>
+<%= f.link_to_add 'Add another file', :bw_attachments, class: 'success button radius tiny' %>

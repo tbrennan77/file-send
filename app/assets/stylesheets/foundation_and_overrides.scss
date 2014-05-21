@@ -108,8 +108,8 @@ $bodyFontFamily: "Nobile", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans
 @import 'foundation';
 @import 'foundation-icons';
 
-body > .row {background: #F8F6EE;}
-body {background: #C9C9C9;}
+body > .row {background: #fff;}
+body {background: #fff;}
 
 dl.tabs {margin-bottom: 0;}
 ul.tabs-content {
@@ -123,10 +123,9 @@ input[type="checkbox"] {
   display: none;
 }
 label {  
-  border:1px solid #CCC;
-  padding: 8px;
+  border:1px solid #CCC;  
   background: #FEFEFE;
-  padding-bottom: 4px;
+  padding: 9px 17px 6px;
 }
 
 label:hover {background: #EEE;}
@@ -148,11 +147,15 @@ label.is_green {
   }
 }
 
+label.checkbox-error {
+  color: red !important;
+}
+
 .top-bar ul li.name {
 background: #616161;
 }
 
-body {background-image: url(/assets/bkgptrn.gif);}
+
 
 .main-listing h2, .main-listing p {
   font-family: 'Nobile', Arial, Helvetica, sans-serif !important;

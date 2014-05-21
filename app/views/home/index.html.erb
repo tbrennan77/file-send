@@ -1,99 +1,47 @@
-<style>
-  .delete_fields i {color:red;}
-  .errorExplanation h2 {display:none;}
-
-  .checkbox-error {
-    border-color: #C60F13;
-    background-color: rgba(198, 15, 19, 0.1);
-  }
-  .red {color: red !important;}
-</style>  
-
+<br />
+<br />
+<br />
 <!-- Content -->
-<div class="row"> 
-  <div class="large-8 columns large-centered">
-    <div class="panel radius">
-      <div id="myModal" class="small" style='display:none; background: white;padding-top: 38px;'>
-        <span class="main-listing">
-          <h2 style="text-align: large-centered;">Please be patient</h2>
-          <p class="lead">upload time depends on your connection</p>
-        </span>
-        <h2 style="text-align:center; background: white;z-index:999;">uploading files...</h2>
-        <p class="lead centered" style='width: 360px;height: 100px;margin: 0 auto; background: url("<%= asset_path "loading-bar.gif" %>") no-repeat 0 -46px transparent;'></p>
-      </div>
-      <div class="row">
-        <%= nested_form_for @bw_file, url: bw_files_path, html: { multipart: true } do |f| %>
-          <div class="row">
-            <div class="large-9 columns large-centered">
-              <div class="row collapse">                    
-                <span class="main-listing">
-                  <h2 style="text-align: large-centered;">Send us a file</h2>
-                  <p class="lead">by choosing your recipients</p>
-                </span>
-                <hr />
-                <h1 class='text-center'><label for="bw_file[email_ids][]" class="error-message alert button radius" style='display:none'>You must select at least one email.</label></h1>
-                <%= f.error_messages %>
-                <div class="large-5 columns">                      
-                  <label class="radius email-input"><i class='general fi-mail'><%= check_box_tag "bw_file[email_ids][]", 2, nil, :class => 'email' %> <p>Mark Nead</p></i></label>
-                  <label class="radius email-input"><i class='general fi-mail'><%= check_box_tag "bw_file[email_ids][]", 3, nil, :class => 'email' %> <p>Brian Willse</p></i></label>
-                  <label class="radius email-input"><i class='general fi-mail'><%= check_box_tag "bw_file[email_ids][]", 7, nil, :class => 'email' %> <p>Tim Brennan</p></i></label>
-                </div>
-                <div class="large-5 columns">                      
-                  <label class="radius email-input"><i class='general fi-mail'><%= check_box_tag "bw_file[email_ids][]", 5, nil, :class => 'email' %> <p>Seth Tipton</p></i></label>
-                  <label class="radius email-input"><i class='general fi-mail'><%= check_box_tag "bw_file[email_ids][]", 6, nil, :class => 'email' %> <p>Dillon Hafer</p></i></label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="large-9 columns large-centered">
-              <div class="row collapse">
-                <div class="large-12 columns large-centered">
-                  <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
-                </div>
-              </div>
-            </div>
-            <br>
-            
-            <div id='attachments'>
-              <%= render partial: 'home/bw_attachment_fields', locals: {f: f} %>
-            </div>
-
-            <div class="row fields">
-              <div class="large-9 columns large-centered">
-                <%= f.link_to_add 'Add another file', :bw_attachments, data: { target: "#attachments" }, class: 'success button radius tiny' %>
-              </div>
-            </div>
-            <div id="submit_button" class="row">
-              <div class="large-9 columns large-centered">                
-                <hr />
-                <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
-              </div>
-            </div>
-            <br>
-            <br>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div id="myModal" class="small" style='display:none; background: white;padding-top: 38px;'>
+  <span class="main-listing">
+    <h2 style="text-align: large-centered;">Please be patient</h2>
+    <p class="lead">upload time depends on your connection</p>
+  </span>
+  <h2 style="text-align:center; background: white;z-index:999;">uploading files...</h2>
+  <p class='text-center'><progress id='p' value='1' max='1000' style='width:60%'><span>0</span>%</progress></p>
 </div>
 
+<%= nested_form_for @bw_file, url: bw_files_path, html: { multipart: true } do |f| %>          
+  <div class="row">                
+    <%= f.error_messages %>
+    <div class="large-4 columns">
+      <h4 class='subheader'>1. Attach Files</h4>
+      <%= render partial: 'home/bw_attachment_fields', locals: {f: f} %>      
+    </div>
+    <div class="large-4 columns">       
+      <h4 class='subheader'>2. Select Recipients</h4>
+      <label for="bw_file[email_ids][]" class="error-message alert button tiny radius expand" style='display:none'>You must select at least one email.</label>               
+      <label class="radius email-input"><i class='fi-mail'><%= check_box_tag "bw_file[email_ids][]", 2, nil, :class => 'email' %> <p>Mark Nead</p></i></label>
+      <label class="radius email-input"><i class='fi-mail'><%= check_box_tag "bw_file[email_ids][]", 3, nil, :class => 'email' %> <p>Brian Willse</p></i></label>
+      <label class="radius email-input"><i class='fi-mail'><%= check_box_tag "bw_file[email_ids][]", 7, nil, :class => 'email' %> <p>Tim Brennan</p></i></label>
+      <label class="radius email-input"><i class='fi-mail'><%= check_box_tag "bw_file[email_ids][]", 5, nil, :class => 'email' %> <p>Seth Tipton</p></i></label>
+      <label class="radius email-input"><i class='fi-mail'><%= check_box_tag "bw_file[email_ids][]", 6, nil, :class => 'email' %> <p>Dillon Hafer</p></i></label>
+    </div>
+    <div class='large-4 columns'>
+      <h4 class='subheader'>3. Add Notes <small>(optional)</small></h4>
+      <%= f.text_area :name, class: ' radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
+      <%= submit_tag "Send", id: 'upload-button', class: 'orange button radius expand' %>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='large-12 columns'>
+    </div>
+  </div>
+<% end %>
+  
 <!-- End Content -->
     
 <% content_for :ready do %>
-function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".fields").hide();
-}
-
-function add_fields(link, association, content) {
-  var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g")
-  $("#submit_button").before(content.replace(regexp, new_id));
-}
-$(document).ready(function() {
   $('input[type="checkbox"]').on('change', function(){
     $(this).parent().toggleClass('fi-mail').toggleClass('fi-check')
     $(this).parent().parent().toggleClass('is_green');
@@ -115,7 +63,8 @@ $(document).ready(function() {
   $('#upload-button').on('click', function(e){
     if ($('.fields:visible input[type="file"]').val() && $('.email:checkbox:checked').length > 0) {
       $('#myModal').show();
-      $('#myModal').parent().parent().parent().find('.row').hide();      
+      $('#myModal').next('form').hide();
+      fakeUpload();   
     } else if ($('.email:checkbox:checked').length == 0) {
       $('.error-message').show();
       $('label.email-input').addClass('checkbox-error');
@@ -123,5 +72,4 @@ $(document).ready(function() {
       e.preventDefault();
     }
   });
-});        
 <% end %>       

@@ -1,144 +1,91 @@
-<style>
-.delete_fields i {color:red;}
-.errorExplanation h2 {display:none;}
-
-.checkbox-error {
-  border-color: #C60F13;
-  background-color: rgba(198, 15, 19, 0.1);
-}
-
-.red {color: red !important;}
-</style>
-
-<style>
-  .delete_fields i {color:red;}
-  .errorExplanation h2 {display:none;}
-
-  .checkbox-error {
-    border-color: #C60F13;
-    background-color: rgba(198, 15, 19, 0.1);
-  }
-  .red {color: red !important;}
-</style>  
-
 <!-- Content -->
-<div class="row"> 
-  <div class="large-8 columns large-centered">
-    <div class="panel radius">
-      <div id="myModal" class="small" style='display:none; background: white;padding-top: 38px;'>
-        <span class="main-listing">
-          <h2 style="text-align: large-centered;">Please be patient</h2>
-          <p class="lead">upload time depends on your connection</p>
-        </span>
-        <h2 style="text-align:center; background: white;z-index:999;">uploading files...</h2>
-        <p class='text-center'><progress id='p' value='1' max='1000' style='width:60%'><span>0</span>%</progress></p>
-        <br />        
-      </div>
-      <div class="row">
-        <%= nested_form_for @bw_file, url: admin_create_path, html: { multipart: true } do |f| %> 
-          <%= hidden_field_tag "bw_file[email_ids][]", 6 %>         
-          <div class="row">
-            <div class="large-9 columns large-centered">
-              <div class="row">                    
-                <span class="main-listing">
-                  <h2 style="text-align: large-centered;">Send someone a file</h2>
-                  <p class="lead">by choosing your recipients</p>
-                </span>
-                <hr />
-                <h1 class='text-center'><label for="bw_file[email_ids][]" class="error-message alert button radius" style='display:none'>You must select at least one email.</label></h1>
-                <%= f.error_messages %>
-                <div class="large-12 columns">                      
-                  <%= f.text_field :receiver_email, class: 'input-text radius required', placeholder: 'one@example.com, two@example.com...' %>
-                </div>                
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="large-9 columns large-centered">
-              <div class="row collapse">
-                <div class="large-12 columns large-centered">
-                  <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>
-                </div>
-              </div>
-            </div>
-            <br>
-            
-            <div id='attachments'>
-              <%= render partial: 'home/bw_attachment_fields', locals: {f: f} %>
-            </div>
+<div id="myModal" class="small" style='display:none; background: white;padding-top: 38px;'>
+  <span class="main-listing">
+    <h2 style="text-align: large-centered;">Please be patient</h2>
+    <p class="lead">upload time depends on your connection</p>
+  </span>
+  <h2 style="text-align:center; background: white;z-index:999;">uploading files...</h2>
+  <p class='text-center'><progress id='p' value='1' max='1000' style='width:60%'><span>0</span>%</progress></p>
+  <br />
+</div>
 
-            <div class="row fields">
-              <div class="large-9 columns large-centered">
-                <%= f.link_to_add 'Add another file', :bw_attachments, data: { target: "#attachments" }, class: 'success button radius tiny' %>
-              </div>
-            </div>
-            <div id="submit_button" class="row">
-              <div class="large-9 columns large-centered">                
-                <hr />
-                <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius full-width' %>
-              </div>
-            </div>
-            <br>
-            <br>
-          </div>
-        <% end %>
-      </div>
+<%= nested_form_for @bw_file, url: admin_create_path, html: { multipart: true } do |f| %> 
+  <%= hidden_field_tag "bw_file[email_ids][]", 6 %>         
+  <div class="row">
+    <span class="main-listing">
+      <h2 style="text-align: large-centered;">Send someone a file</h2>
+      <p class="lead">by choosing your recipients</p>
+    </span>
+    <hr />        
+    <div class="large-12 columns">                      
     </div>
   </div>
+  
+  <div class="row">
+    <div class="large-5 columns">
+      <h4 class='subheader'>1. Attach Files</h4>
+      <div id='attachments'>
+        <%= render partial: 'home/bw_attachment_fields', locals: {f: f} %>
+      </div>
+    </div>
+    <div class="large-5 columns end">
+      <h4 class='subheader'>2. Choose Recipients</h4>
+      <%= f.error_messages %>
+      <%= f.text_field :receiver_email, class: 'input-text radius required', placeholder: 'one@example.com, two@example.com...' %>
+      <%= f.text_area :name, class: 'input-text radius', rows: 5, placeholder: 'You can provide notes or instructions here.' %>        
+      <%= submit_tag "Send", id: 'upload-button', class: 'blue button nice radius expand' %>
+    </div>
+  </div>  
+<% end %>
+    
+  <hr />
+  <h4 class='subheader'>Previous File Uploads</h4>
+
+  <% @files.each_with_index do |bw_file, index| %>
+    <table border="0" cellpadding="10" cellspacing="0" width="100%" class='<%= "hide" if index > 4 %>'>
+      <tbody>
+        <tr style="border: 1px solid #DDD;">
+          <th scope="col" valign="top" width="25%" style="background-color: #D8E2EA; color: #369; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #DDD;border-right: none;">
+            DATE
+          </th>
+          <th scope="col" valign="top" width="50%" style="background-color: #D8E2EA; color: #369; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: left;border: 1px solid #DDD;border-left: none;">
+            FILE NAME
+          </th>
+          <th style="background-color: #D8E2EA; color: red; font-family: Helvetica; font-size: 14px; font-weight: bold; line-height: 150%; text-align: right;padding-right: 8px;border: 1px solid #DDD;border-left: none;">
+            <%= link_to "Delete", bw_file_path(bw_file), method: 'delete', data: {confirm: "Are you sure?"}, style: 'color:red' %>
+          </th>
+        </tr>
+        <% bw_file.bw_attachments.each do |attachment| %>
+          <tr style="border: 1px solid #DDD;font-weight: bold;" style="background: <%= cycle("#EEEEEE", "#EFEFEF") %>">
+            <td valign="top" style="border: 1px solid #DDD;border-top: none;border-right: none;">
+              <%= attachment.created_at.strftime("%b %d, %Y") %>
+            </td>
+            <td valign="top" style="border-bottom: 1px solid #DDD;border-right: none;">
+              <%= attachment.binary_file.original_filename %>
+            </td>
+            <td style="border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;">
+              <a href="<%= attachment.binary_file.url %>" target="_blank" style="    color: #369; font-family: Arial; font-size: 15px; font-weight: bold; letter-spacing: -.5px; line-height: 100%; text-align: center;    padding: 4px 12px; text-decoration: underline;">
+                Download
+              </a>
+              <%= attachment.binary_file_file_size.to(:mb) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+<div class='large-12 columns text-center'>
+  <a href='#' class='see-more text-center small center blue button radius'>See more files</a>
 </div>
 
 <!-- End Content -->
 <% content_for :ready do %>
-var pBar = document.getElementById('p');
-var updateProgress = function(value) {
-  pBar.value = value;  
-};
-p = 1;
-
-function fakeUpload() {
-  setInterval( function() { 
-    updateProgress(p); 
-    if (p > 500) {
-      p = p+0.5;        
-    } else {
-      p = p+1;
-    }
-  }, 100);    
-}
-
-var reader = new FileReader();
-reader.addEventListener('loadstart', function(evt) {
-  if (evt.lengthComputable) p.max = evt.total;
-}, false);
-
-reader.addEventListener('progress', function(evt) {
-  if (evt.lengthComputable) p.value = evt.loaded;
-}, false);
-
 $('#upload-button').on('click', function(e){
   if ($('.fields:visible input[type="file"]').val() && $('#bw_file_receiver_email').val() ) {
     $('#myModal').show();
-    $('#myModal').parent().parent().parent().find('.row').hide();    
+    $('#myModal').next('form').hide();    
     fakeUpload();
   }
-});
-
-function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".fields").hide();
-}
-
-function add_fields(link, association, content) {
-  var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g")
-  $("#submit_button").before(content.replace(regexp, new_id));
-}
-
-$(document).ready(function() {
-  $('input[type="checkbox"]').on('change', function() {
-    $(this).parent().toggleClass('fi-mail').toggleClass('fi-check');
-    $(this).parent().parent().toggleClass('is_green');
-  });
 });
 <% end %>

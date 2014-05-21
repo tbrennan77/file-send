@@ -41,7 +41,7 @@ i.general {color: #e37f1d;}
   display: inline;
   position: relative;
   top: -2px;
-  margin-left: 5px;
+  margin-left: 10px;
   color: #333;
  }
 
@@ -85,4 +85,43 @@ body > .alert-box {text-align: center; width: 100%; border-left: 0; border-right
 
 .email-input {
   margin-bottom: 10px;
+}
+
+.delete_fields i {color:red;}
+.errorExplanation h2 {display:none;}
+
+.checkbox-error {
+  border-color: #C60F13 !important;
+  background-color: rgba(198, 15, 19, 0.1) !important;
+}
+.red {color: red !important;}
+.radius.email-input.checkbox-error i, .radius.email-input.checkbox-error i p {color: red !important;}
+
+.orange.button.radius {
+  background: #db6b17;
+  &:hover {
+    background: darken(#db6b17, 12%);
+  }
+}
+
+h4.subheader {color: #4e4e4e;}
+
+.fadeIn {
+   -webkit-animation: fadein 1.5s;
+       -moz-animation: fadein 1.5s;
+        -ms-animation: fadein 1.5s;
+         -o-animation: fadein 1.5s;
+            animation: fadein 1.5s;            
+}
+
+@keyframes fadein {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+@-moz-keyframes fadein {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+  from { opacity: 0; } to { opacity: 1; }
 }

@@ -2,66 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title><%= content_for?(:title) ? yield(:title) : "BW Upload" %></title>  
+    <title><%= content_for?(:title) ? yield(:title) : "BW Send" %></title>  
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />        
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">  
+    <link href="//fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">  
     <!-- Set the viewport width to device width for mobile -->
     <%= stylesheet_link_tag "application" %>    
-    <%= javascript_include_tag "vendor/modernizr" %>
-    
+    <%= javascript_include_tag "vendor/modernizr" %>    
     <%= csrf_meta_tags %>
   </head>
   <body>
-  <% if flash[:notice] %>
+    <% if flash[:notice] %>
       <div class='alert-box success'><%= flash[:notice] %></div>
     <% end %>
     <% if flash[:error] %>
       <div class='alert-box error'><%= flash[:error] %></div>
-  <% end %>
-  
-      <nav class="top-bar" style='margin-left: 0'>
-        <ul>
-          <li class="name" style="background:##616161 !important"><h1><%= link_to image_tag("header_logo.png"), root_path %></h1></li>
-        </ul>
- 
-        <section>
-          <ul class="right">
-            <!-- Hide search for now 
-          <li class="search">
-            <%= form_tag root_path do %>
-              <%= search_field_tag :search, nil, placeholder: 'Search...' %>
-            <% end %>
-          </li>
-            <li class="has-button">              
-            <a class="small button radius" href="#">Search</a>            
-          </li>
-            -->
-          </ul>
-        </section>
-    </nav>
-  
-    <!-- Navigation -->
-  <div class="row header-nav">
-    <div class="large-12 columns">
- </div>
- </div>
-    <!-- End Navigation -->
- 
- <div class="row">
-    <div class="large-12 columns">
-     <%= yield %>
-   </div>
- </div>
+    <% end %>
+   
+     <div class="row">
+        <div class="large-12 columns">
+         <%= yield %>
+       </div>
+     </div>
  
     <!-- Footer -->
     <%= javascript_include_tag "application" %>    
     <script><%= yield(:ready) %></script>
-  
-
-    <!-- End Footer -->
-  <%= yield :reveal_modal %>
-</body>
+  </body>
 </html>
